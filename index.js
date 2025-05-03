@@ -286,6 +286,12 @@ async function pingCycleForAccount(accountDetail) {
 
 function logFullUpdate(maskedEmail, todayPoint, totalPoint, totalActiveNodes, totalProxylist, pingStatus, errCode = "") {
   const statusColor = (pingStatus === "Success") ? Colors.Green : Colors.Red;
+  console.log(`
+  ╭━┳╮╱╱╭╮╱╭━╮╱╱
+  ┃┃┃┣━┳╯┣━┫╋┣━╮
+  ┃┃┃┃╋┃╋┃┻╋╮┃╋┃
+  ╰┻━┻━┻━┻━┻━┻━╯
+  `);
   console.log(`\n${Colors.Dim}${Colors.RESET}${'―'.repeat(50)}`);
   console.log(
     `${Colors.Gold}]>${Colors.RESET} Account ${Colors.Teal}${maskedEmail}
@@ -495,11 +501,11 @@ ${Colors.Gold}3. ${Colors.Red}Keluar${Colors.RESET}
       rl.close();
       await displayMenu();
     } else if (answer.trim() === "3") {
-      console.log(`${Colors.Red}Keluar dati aplikasi. Selamat tingal!${Colors.RESET}`);
+      console.log(`${Colors.Red}Keluar dari aplikasi. Selamat tingal!${Colors.RESET}`);
       rl.close();
       process.exit(0);
     } else {
-      console.log(`${Colors.Red}Invalid option. Mohon cibal agi.${Colors.RESET}`);
+      console.log(`${Colors.Red}Invalid option. Mohon cobalagi.${Colors.RESET}`);
       rl.close();
       await displayMenu();
     }
