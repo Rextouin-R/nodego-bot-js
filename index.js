@@ -21,23 +21,18 @@ const Colors = {
 
 function CoderMark() {
   console.log(`
-╭━━━╮╱╱╱╱╱╱╱╱╱╱╱╱╱╭━━━┳╮
-┃╭━━╯╱╱╱╱╱╱╱╱╱╱╱╱╱┃╭━━┫┃${Colors.Green}
-┃╰━━┳╮╭┳━┳━━┳━━┳━╮┃╰━━┫┃╭╮╱╭┳━╮╭━╮
-┃╭━━┫┃┃┃╭┫╭╮┃╭╮┃╭╮┫╭━━┫┃┃┃╱┃┃╭╮┫╭╮╮${Colors.Blue}
-┃┃╱╱┃╰╯┃┃┃╰╯┃╰╯┃┃┃┃┃╱╱┃╰┫╰━╯┃┃┃┃┃┃┃
-╰╯╱╱╰━━┻╯╰━╯┣━━┻╯╰┻╯╱╱╰━┻━╮╭┻╯╰┻╯╰╯${Colors.RESET}
-╱╱╱╱╱╱╱╱╱╱╱┃┃╱╱╱╱╱╱╱╱╱╱╭━╯┃${Colors.Blue}{${Colors.Neon}cmalf${Colors.Blue}}${Colors.RESET}
-╱╱╱╱╱╱╱╱╱╱╱╰╯╱╱╱╱╱╱╱╱╱╱╰━━╯
-\n${Colors.RESET}NODEGO Bot ${Colors.Blue}{ ${Colors.Neon}JS${Colors.Blue} }${Colors.RESET}
-    \n${Colors.Green}${'―'.repeat(50)}
-    \n${Colors.Gold}[+]${Colors.RESET} DM : ${Colors.Teal}https://t.me/furqonflynn
-    \n${Colors.Gold}[+]${Colors.RESET} GH : ${Colors.Teal}https://github.com/cmalf/
-    \n${Colors.Green}${'―'.repeat(50)}
-    \n${Colors.Gold}]-> ${Colors.Blue}{ ${Colors.RESET}NODEGO Extension${Colors.Neon} v1.1.4${Colors.Blue} } ${Colors.RESET}
-    \n${Colors.Gold}]-> ${Colors.Blue}{ ${Colors.RESET}BOT${Colors.Neon} v1.0.0${Colors.Blue} } ${Colors.RESET}
-    \n${Colors.Green}${'―'.repeat(50)}
+   ▄▀█ █ █▀█ █▀▄ █▀█ █▀█ █▀█ ∞
+   █▀█ █ █▀▄ █▄▀ █▀▄ █▄█ █▀▀ 
+   ┏━┓ ┏━┓         ┏━┓ ╔═╗             ╔═╗ ┏━┓__            ┏━┓
+   ┃ ┃ ┃ ┃ ┏━╻━━━┓ ┃ ┃ ┏━┓ ┏━╻━━╻━━━━┓ ┏━┓ ┃ ┏━┛  ┏━━━━╮ ╭━━╹ ┃
+   ┃ ┗━┛ ┃ ┃ ┏━┓ ┃ ┃ ┃ ┃ ┃ ┃ ┏━┓ ┏━┓ ┃ ┃ ┃ ┃ ┗━━┓ ┃ ┏━━┛ ┃ ━━ ┃
+   ┗━━━ ━┛ ┗━┛ ┗━┛ ┗━┛ ┗━┛ ┗━┛ ┗━┛ ┗━┛ ┗━┛ ┗━━━━┛ ┗━━━━┛ ╰━━━━┛
     `);
+  console.log(`━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━`);
+  console.log(`==================================≠===============`);
+  console.log(`==> 🟦 join channel : https://t.me/UNLXairdop`);
+  console.log(`==> ⬛ github : https://github.com/Rextouin-R/`);
+  console.log(`==================================≠===============`);
 }
 
 class RandomUserAgent {
@@ -59,7 +54,7 @@ class RandomUserAgent {
 
   static getRandomUserAgent() {
     if (!this.userAgents || this.userAgents.length === 0) {
-      throw new Error("User agents array is empty or undefined");
+      throw new Error("User agents array kosong tidak ditemukan");
     }
     return this.userAgents[Math.floor(Math.random() * this.userAgents.length)];
   }
@@ -75,7 +70,7 @@ class ProxyError extends Error {
 
 async function getProxyAgent(proxy) {
   if (!proxy) {
-    throw new ProxyError("Proxy URL is required", proxy);
+    throw new ProxyError("Proxy URL di perlukan", proxy);
   }
   try {
     if (proxy.startsWith("http://") || proxy.startsWith("https://")) {
@@ -84,12 +79,12 @@ async function getProxyAgent(proxy) {
     if (proxy.startsWith("socks://") || proxy.startsWith("socks5://")) {
       return new SocksProxyAgent(proxy);
     }
-    throw new ProxyError(`Unsupported proxy protocol: ${proxy}`, proxy);
+    throw new ProxyError(`Proxy tidak di dukung protocol: ${proxy}`, proxy);
   } catch (error) {
     if (error instanceof ProxyError) {
       throw error;
     }
-    throw new ProxyError(`Failed to create proxy agent: ${error.message}`, proxy);
+    throw new ProxyError(`Gagal membuat proxy agent: ${error.message}`, proxy);
   }
 }
 
@@ -110,13 +105,13 @@ async function loadAccountsAndProxies() {
         .map(line => line.trim())
         .filter(Boolean);
     } catch (err) {
-      console.log(`${Colors.Magenta}[INFO]${Colors.RESET} Could not read proxy file (proxy.txt), using local network for all accounts.`);
+      console.log(`${Colors.Magenta}[INFO]${Colors.RESET} Tidak bisa membaca proxy di (proxy.txt), menggunakan jaringan untuk semua akun.`);
     }
     return tokens.map((token, index) => {
       return { Token: token, Proxy: proxies[index] || null };
     });
   } catch (err) {
-    console.error(`${Colors.Red}[ERROR]${Colors.RESET} Failed to read data file (data.txt): ${err.message}`);
+    console.error(`${Colors.Red}[ERROR]${Colors.RESET} Gagal membaca data file (data.txt): ${err.message}`);
     process.exit(1);
   }
 }
@@ -250,15 +245,15 @@ async function pingNode(accessToken, proxyAgent = null) {
     if (response.status >= 200 && response.status < 300) {
       return { success: true, status: response.status };
     } else {
-      throw new Error(`Ping failed with status: ${response.status}`);
+      throw new Error(`Ping gagal dengan status: ${response.status}`);
     }
   } catch (error) {
     const statusCode = error.response?.data?.statusCode || error.response?.status || 0;
     if (statusCode === 429) {
-      console.log("Ping ignored due to duplicate prevention (429), retrying ping in 2 minutes...");
+      console.log("Mengabaikan PING karena mencegah diplikat (429), memulai ulang ping dalam 2 menit...");
     } else {
       console.error(`${Colors.Red}[PING ERROR]${Colors.RESET} ${error.message}`);
-      console.log("Retrying ping in 2 minutes...");
+      console.log("Memulai ulang ping dalam 2 menit...");
     }
     await delay(120000);
     return await pingNode(accessToken, proxyAgent);
@@ -281,9 +276,9 @@ async function pingCycleForAccount(accountDetail) {
     }
     try {
       await pingNode(accountDetail.token, agent);
-      logShortUpdate(accountDetail.masked, "Success", "", proxyIP);
+      logShortUpdate(accountDetail.masked, "Berhasil", "", proxyIP);
     } catch (error) {
-      logShortUpdate(accountDetail.masked, "Failed", error.response?.status || error.message, proxyIP);
+      logShortUpdate(accountDetail.masked, "Gagal", error.response?.status || error.message, proxyIP);
     }
     await delay(1000);
   }
@@ -294,17 +289,17 @@ function logFullUpdate(maskedEmail, todayPoint, totalPoint, totalActiveNodes, to
   console.log(`\n${Colors.Dim}${Colors.RESET}${'―'.repeat(50)}`);
   console.log(
     `${Colors.Gold}]>${Colors.RESET} Account ${Colors.Teal}${maskedEmail}
-${Colors.Teal}[+]${Colors.RESET} point today : ${todayPoint}${Colors.RESET}
-${Colors.Teal}[+]${Colors.RESET} points total: ${totalPoint}${Colors.RESET}
-${Colors.Teal}[+]${Colors.RESET} Total nodes : ${Colors.Gold}${totalActiveNodes}${Colors.RESET}
-${Colors.Teal}[+]${Colors.RESET} Total Proxy : ${Colors.Gold}${totalProxylist}${Colors.RESET}
-${Colors.Teal}[+]${Colors.RESET} status ping : ${statusColor}${pingStatus}${(errCode ? " (" + errCode + ")" : "")}${Colors.RESET}`
+${Colors.Teal}[+]${Colors.RESET} point hari ini : ${todayPoint}${Colors.RESET}
+${Colors.Teal}[+]${Colors.RESET} points total   : ${totalPoint}${Colors.RESET}
+${Colors.Teal}[+]${Colors.RESET} Total nodes    : ${Colors.Gold}${totalActiveNodes}${Colors.RESET}
+${Colors.Teal}[+]${Colors.RESET} Total Proxy    : ${Colors.Gold}${totalProxylist}${Colors.RESET}
+${Colors.Teal}[+]${Colors.RESET} status ping    : ${statusColor}${pingStatus}${(errCode ? " (" + errCode + ")" : "")}${Colors.RESET}`
   );
   console.log(`${Colors.Dim}${Colors.RESET}${'―'.repeat(50)}`);
 }
 
 function logShortUpdate(maskedEmail, pingStatus, errCode = "", proxyIP = "") {
-  const statusColor = (pingStatus === "Success" || pingStatus === "Checkin Success") ? Colors.Green : Colors.Red;
+  const statusColor = (pingStatus === "Berhasil" || pingStatus === "Checkin Berhasil") ? Colors.Green : Colors.Red;
   console.log(
     `${Colors.Gold}]>${Colors.RESET} ${maskedEmail} | ProxyIP: ${Colors.Neon}${proxyIP}${Colors.RESET} | status: ${statusColor}${pingStatus}${(errCode ? " (" + errCode + ")" : "")}${Colors.RESET}`
   );
@@ -320,7 +315,7 @@ async function runPinger() {
         const agent = await getProxyAgent(acc.Proxy);
         proxyAgents.push({ agent, proxy: acc.Proxy });
       } catch (err) {
-        console.error(`${Colors.Magenta}[INFO]${Colors.RESET} Skipping invalid proxy for account with token ${acc.Token}: ${err.message}`);
+        console.error(`${Colors.Magenta}[INFO]${Colors.RESET} Melewatkan proxy tidak falid untuk akun dengan token ${acc.Token}: ${err.message}`);
       }
     }
 
@@ -334,7 +329,7 @@ async function runPinger() {
         try {
           userInfo = await new APIClient(acc.Token, null).getUserInfo();
         } catch (error) {
-          console.error(`Error fetching user info for account with token ${acc.Token}: ${error.message}`);
+          console.error(`Kesalahan memeriksa informasi pengguna dengan token ${acc.Token}: ${error.message}`);
           continue;
         }
       }
@@ -342,7 +337,7 @@ async function runPinger() {
       try {
         userInfo = await new APIClient(acc.Token, null).getUserInfo();
       } catch (error) {
-        console.error(`Error fetching user info for account with token ${acc.Token}: ${error.message}`);
+        console.error(`Kesalahan memeriksa informasi pengguna dengan token ${acc.Token}: ${error.message}`);
         continue;
       }
     }
@@ -421,7 +416,7 @@ async function runDailyCheckin() {
         const agent = await getProxyAgent(acc.Proxy);
         proxyAgents.push({ agent, proxy: acc.Proxy });
       } catch (err) {
-        console.error(`${Colors.Magenta}[INFO]${Colors.RESET} Skipping invalid proxy for account with token ${acc.Token}: ${err.message}`);
+        console.error(`${Colors.Magenta}[INFO]${Colors.RESET} Mengabaikan informasi proxy tidak falid untuk pengguna dengan token ${acc.Token}: ${err.message}`);
       }
     }
     const randomAgent = (proxyAgents.length > 0)
@@ -432,7 +427,7 @@ async function runDailyCheckin() {
     try {
       userInfo = await client.getUserInfo();
     } catch (error) {
-      console.error(`Error fetching user info for token ${acc.Token}: ${error.message}`);
+      console.error(`Kesalahan memeriksa informasi pengguna untuk token ${acc.Token}: ${error.message}`);
       continue;
     }
     const masked = maskEmail(userInfo.email);
@@ -443,16 +438,16 @@ async function runDailyCheckin() {
         break;
       } catch (error) {
         if (error.statusCode === 429) {
-          console.log(`${Colors.Blue}[DAILY CHECKIN RETRY]${Colors.RESET} ${masked} encountered error 429, retrying in 15 seconds...`);
+          console.log(`${Colors.Blue}[DAILY CHECKIN DIMUAT ULANG]${Colors.RESET} ${masked} kesalahan ditemukan 429, memulai ulan dalam 15 detik...`);
           await delay(15000);
           continue;
-        } else if (error.statusCode === 400 && error.message.includes("once per day")) {
-          console.log(`${Colors.Blue}[DAILY CHECKIN]${Colors.RESET} ${masked} already checked in today.`);
-          logShortUpdate(masked, "Request Success");
+        } else if (error.statusCode === 400 && error.message.includes("satu per hari")) {
+          console.log(`${Colors.Blue}[DAILY CHECKIN]${Colors.RESET} ${masked} Siap di periksa hari ini.`);
+          logShortUpdate(masked, "Permintaan berhasil ");
           result = null;
           break;
         } else {
-          logShortUpdate(masked, "Failed", error.statusCode || error.message);
+          logShortUpdate(masked, "Gagal", error.statusCode || error.message);
           result = null;
           break;
         }
@@ -460,13 +455,13 @@ async function runDailyCheckin() {
     }
     if (result) {
       if (result.statusCode >= 200 && result.statusCode < 300) {
-        logShortUpdate(masked, "Checkin Success");
+        logShortUpdate(masked, "Checkin berhasil");
       } else {
         const activeNodes = userInfo.nodes.filter(node => node.isActive);
         const totalTodayPoint = activeNodes.reduce((sum, node) => sum + node.todayPoint, 0);
         const totalNodeActive = activeNodes.length;
         const newTotal = result.userData?.rewardPoint || userInfo.totalPoint;
-        logFullUpdate(masked, totalTodayPoint, newTotal, totalNodeActive, proxyAgents.length, "Success");
+        logFullUpdate(masked, totalTodayPoint, newTotal, totalNodeActive, proxyAgents.length, "Berhasil");
       }
     }
   }
@@ -476,9 +471,9 @@ function displayMenu() {
   console.log(`
 ${Colors.Blue}Menu:${Colors.RESET}
 
-${Colors.Gold}1. ${Colors.RESET}Run Pinger
+${Colors.Gold}1. ${Colors.RESET}Menjalankan Ping
 ${Colors.Gold}2. ${Colors.RESET}Daily Checkin
-${Colors.Gold}3. ${Colors.Red}Exit${Colors.RESET}
+${Colors.Gold}3. ${Colors.Red}Keluar${Colors.RESET}
 `);
   const rl = readline.createInterface({
     input: process.stdin,
@@ -488,23 +483,23 @@ ${Colors.Gold}3. ${Colors.Red}Exit${Colors.RESET}
     if (answer.trim() === "1") {
       console.clear();
       console.log(`\n${Colors.Dim}${Colors.RESET}${'―'.repeat(50)}`);
-      console.log(`${Colors.Teal}Starting pinger cycles...${Colors.RESET}`);
+      console.log(`${Colors.Teal}Memulai pinger cycles...${Colors.RESET}`);
       console.log(`${Colors.Dim}${Colors.RESET}${'―'.repeat(50)}\n`);
       await runPinger();
     } else if (answer.trim() === "2") {
       console.clear();
       console.log(`\n${Colors.Dim}${Colors.RESET}${'―'.repeat(50)}`);
-      console.log(`${Colors.Gold}Performing daily checkin for all accounts...${Colors.RESET}`);
+      console.log(`${Colors.Gold}Performa daily checkin untuk semua akun...${Colors.RESET}`);
       console.log(`${Colors.Dim}${Colors.RESET}${'―'.repeat(50)}\n`);
       await runDailyCheckin();
       rl.close();
       await displayMenu();
     } else if (answer.trim() === "3") {
-      console.log(`${Colors.Red}Exiting the application. Goodbye!${Colors.RESET}`);
+      console.log(`${Colors.Red}Keluar dati aplikasi. Selamat tingal!${Colors.RESET}`);
       rl.close();
       process.exit(0);
     } else {
-      console.log(`${Colors.Red}Invalid option. Please try again.${Colors.RESET}`);
+      console.log(`${Colors.Red}Invalid option. Mohon cibal agi.${Colors.RESET}`);
       rl.close();
       await displayMenu();
     }
@@ -522,6 +517,6 @@ async function main() {
 main();
 
 process.on("SIGINT", () => {
-  console.log(`\n${Colors.Red}Gracefully shutting down.${Colors.RESET}`);
+  console.log(`\n${Colors.Red}Ditutup dengan angun.${Colors.RESET}`);
   process.exit(0);
 });
