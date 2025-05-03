@@ -287,10 +287,8 @@ async function pingCycleForAccount(accountDetail) {
 function logFullUpdate(maskedEmail, todayPoint, totalPoint, totalActiveNodes, totalProxylist, pingStatus, errCode = "") {
   const statusColor = (pingStatus === "Success") ? Colors.Green : Colors.Red;
   console.log(`
-  ╭━┳╮╱╱╭╮╱╭━╮╱╱
-  ┃┃┃┣━┳╯┣━┫╋┣━╮
-  ┃┃┃┃╋┃╋┃┻╋╮┃╋┃
-  ╰┻━┻━┻━┻━┻━┻━╯
+  █▄░█ █▀█ █▀▄ █▀▀ █▀▀ █▀█
+  █░▀█ █▄█ █▄▀ ██▄ █▄█ █▄█
   `);
   console.log(`\n${Colors.Dim}${Colors.RESET}${'―'.repeat(50)}`);
   console.log(
