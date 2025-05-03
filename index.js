@@ -488,7 +488,7 @@ ${Colors.Gold}3. ${Colors.Red}Keluar${Colors.RESET}
     input: process.stdin,
     output: process.stdout
   });
-  rl.question("Pilih opsi (1, 2 atau 3): ", async (answer) => {
+  rl.question("Opsi pilihan (1, 2 atau 3): ", async (answer) => {
     if (answer.trim() === "1") {
       console.clear();
       console.log(`\n${Colors.Dim}${Colors.RESET}${'―'.repeat(50)}`);
