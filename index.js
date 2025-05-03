@@ -250,7 +250,7 @@ async function pingNode(accessToken, proxyAgent = null) {
   } catch (error) {
     const statusCode = error.response?.data?.statusCode || error.response?.status || 0;
     if (statusCode === 429) {
-      console.log("Mengabaikan PING karena mencegah diplikat (429), memulai ulang ping dalam 2 menit...");
+      console.log("Mengabaikan PING karena mencegah duplikat (429), memulai ulang ping dalam 2 menit...");
     } else {
       console.error(`${Colors.Red}[PING ERROR]${Colors.RESET} ${error.message}`);
       console.log("Memulai ulang ping dalam 2 menit...");
