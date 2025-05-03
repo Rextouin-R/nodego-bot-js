@@ -293,7 +293,7 @@ function logFullUpdate(maskedEmail, todayPoint, totalPoint, totalActiveNodes, to
   const statusColor = (pingStatus === "Success") ? Colors.Green : Colors.Red;
   console.log(`
   █▄░█ █▀█ █▀▄ █▀▀ █▀▀ █▀█
-  █░▀█ █▄█ █▄▀ ██▄ █▄█ █▄█
+  █░▀█ █▄█ █▄▀ ██▄ █▄█ █▄█ {${Colors.Neon}Rextouin${Colors.Teal}}${Colors.RESET}
   `);
   console.log(`\n${Colors.Dim}${Colors.RESET}${'―'.repeat(50)}`);
   console.log(
