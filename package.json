@@ -1,7 +1,7 @@
 {
   "name": "nodego-bot-js",
   "version": "1.0.0",
-  "description": "https://github.com/cmalf/nodego-bot-js.git",
+  "description": "https://github.com/Rextouin-R/nodego-bot-js.git",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
