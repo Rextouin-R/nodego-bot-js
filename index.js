@@ -225,7 +225,7 @@ class APIClient {
 
 const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
-async function conect(accessToken, proxyAgent = null) {
+async function connect(accessToken, proxyAgent = null) {
   const SERVER_URL = "https://api.depined.org/api/user/widget-connect";
   const config = {
     method: "POST",
