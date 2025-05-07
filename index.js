@@ -226,7 +226,7 @@ class APIClient {
 const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
 async function pingNode(accessToken, proxyAgent = null) {
-  const SERVER_URL = "https://nodego.ai/api/user/nodes/ping";
+  const SERVER_URL = "https://api.depined.org/api/user/widget-connect";
   const config = {
     method: "POST",
     url: SERVER_URL,
@@ -235,7 +235,7 @@ async function pingNode(accessToken, proxyAgent = null) {
       "Accept": "application/json, text/plain, */*",
       "Accept-Language": "id-ID,id;q=0.9,en-US;q=0.8,en;q=0.7",
       "Authorization": `Bearer ${accessToken}`,
-      "Origin": "chrome-extension://jbmdcnidiaknboflpljihfnbonjgegah",
+      "Origin": "chrome-extension://pjlappmodaidbdjhmhifbnnmmkkicjoc",
       "Sec-Fetch-Dest": "empty",
       "Sec-Fetch-Mode": "cors",
       "Sec-Fetch-Site": "none",
