@@ -270,7 +270,6 @@ async function conect(accessToken, proxyAgent = null) {
   }
 }
 
-}
 
 async function pingNode(accessToken, proxyAgent = null) {
   const SERVER_URL = "https://api.depined.org/api/user/widget-connect";
