@@ -225,8 +225,8 @@ class APIClient {
 
 const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
-async function connect(accessToken, proxyAgent = null) {
-  const SERVER_URL = "https://api.depined.org/api/user/widget-connect";
+async function pingNode(accessToken, proxyAgent = null) {
+  const SERVER_URL = "https://nodego.ai/api/user/nodes/ping";
   const config = {
     method: "POST",
     url: SERVER_URL,
@@ -235,7 +235,7 @@ async function connect(accessToken, proxyAgent = null) {
       "Accept": "application/json, text/plain, */*",
       "Accept-Language": "id-ID,id;q=0.9,en-US;q=0.8,en;q=0.7",
       "Authorization": `Bearer ${accessToken}`,
-      "Origin": "chrome-extension://pjlappmodaidbdjhmhifbnnmmkkicjoc",
+      "Origin": "chrome-extension://jbmdcnidiaknboflpljihfnbonjgegah",
       "Sec-Fetch-Dest": "empty",
       "Sec-Fetch-Mode": "cors",
       "Sec-Fetch-Site": "none",
@@ -254,10 +254,9 @@ async function connect(accessToken, proxyAgent = null) {
     if (response.status >= 200 && response.status < 300) {
       return { success: true, status: response.status };
     } else {
-      throw new Error(`Ping gagal dengan status: ${response.status}`);
+      throw new Error(`Ping failed with status: ${response.status}`);
     }
-  }
-    catch (error) {
+  } catch (error) {
     const statusCode = error.response?.data?.statusCode || error.response?.status || 0;
     if (statusCode === 429) {
       console.log("Mengabaikan PING karena mencegah duplikat (429), memulai ulang ping dalam 2 menit...");
@@ -266,7 +265,7 @@ async function connect(accessToken, proxyAgent = null) {
       console.log("Memulai ulang ping dalam 2 menit...");
     }
     await delay(120000);
-    return await connect(accessToken, proxyAgent);
+    return await pingNode(accessToken, proxyAgent);
   }
 }
 
