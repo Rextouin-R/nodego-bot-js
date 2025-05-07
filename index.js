@@ -150,7 +150,7 @@ async function getProxyIP(proxyAgent) {
 
 class APIClient {
   constructor(token, proxyAgent = null) {
-    this.apiBaseUrl = "https://api.depined.org/api";
+    this.apiBaseUrl = "https://nodego.ai/api";
     this.bearerToken = token;
     this.proxyAgent = proxyAgent;
   }
