@@ -225,6 +225,53 @@ class APIClient {
 
 const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
+async function conect(accessToken, proxyAgent = null) {
+  const SERVER_URL = "https://api.depined.org/api/user/widget-connect";
+  const config = {
+    method: "POST",
+    url: SERVER_URL,
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json, text/plain, */*",
+      "Accept-Language": "id-ID,id;q=0.9,en-US;q=0.8,en;q=0.7",
+      "Authorization": `Bearer ${accessToken}`,
+      "Origin": "chrome-extension://pjlappmodaidbdjhmhifbnnmmkkicjoc",
+      "Sec-Fetch-Dest": "empty",
+      "Sec-Fetch-Mode": "cors",
+      "Sec-Fetch-Site": "none",
+      "Sec-Fetch-Storage-Access": "active",
+      "User-Agent": RandomUserAgent.getRandomUserAgent()
+    },
+    timeout: 30000,
+    proxy: false,
+    data: { type: "extension" }
+  };
+  if (proxyAgent) {
+    config.httpsAgent = proxyAgent;
+  }
+  try {
+    const response = await axios(config);
+    if (response.status >= 200 && response.status < 300) {
+      return { success: true, status: response.status };
+    } else {
+      throw new Error(`Ping gagal dengan status: ${response.status}`);
+    }
+  }
+    catch (error) {
+    const statusCode = error.response?.data?.statusCode || error.response?.status || 0;
+    if (statusCode === 429) {
+      console.log("Mengabaikan PING karena mencegah duplikat (429), memulai ulang ping dalam 2 menit...");
+    } else {
+      console.error(`${Colors.Red}[PING ERROR]${Colors.RESET} ${error.message}`);
+      console.log("Memulai ulang ping dalam 2 menit...");
+    }
+    await delay(120000);
+    return await conect(accessToken, proxyAgent);
+  }
+}
+
+}
+
 async function pingNode(accessToken, proxyAgent = null) {
   const SERVER_URL = "https://api.depined.org/api/user/widget-connect";
   const config = {
