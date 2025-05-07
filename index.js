@@ -266,7 +266,7 @@ async function connect(accessToken, proxyAgent = null) {
       console.log("Memulai ulang ping dalam 2 menit...");
     }
     await delay(120000);
-    return await conect(accessToken, proxyAgent);
+    return await connect(accessToken, proxyAgent);
   }
 }
 
